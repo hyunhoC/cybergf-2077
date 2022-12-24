@@ -1,7 +1,12 @@
 import { createRoot } from "react-dom/client";
+import Chatting from "./Chatting/Chatting";
 
 const App = () => {
-  return <div>Hello</div>;
+  return (
+    <div className="flex h-screen w-screen justify-center bg-black">
+      <Chatting />
+    </div>
+  );
 };
 
 const container = document.getElementById("root");
