@@ -3,7 +3,7 @@ import Chatting from "./Chatting/Chatting";
 
 const App = () => {
   return (
-    <div className="flex h-screen w-screen justify-center bg-black">
+    <div className="app-container flex h-screen w-screen items-center justify-center">
       <Chatting />
     </div>
   );

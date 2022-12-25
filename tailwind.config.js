@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "katalk-bg": "rgba(186,206,224,255)",
+        "katalk-bg": "rgba(210,224,237,255)",
         "katalk-mychat": "rgba(255,235,51,255)",
       },
     },
