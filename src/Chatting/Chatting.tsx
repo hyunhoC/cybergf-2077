@@ -9,6 +9,7 @@ const Chatting = () => {
     { message: "안녕", isMyMessage: true },
     { message: "안녕", isMyMessage: false },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const configuration = new Configuration({
     apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -16,11 +17,15 @@ const Chatting = () => {
   const openai = new OpenAIApi(configuration);
 
   const sendChat = async () => {
+    if (isLoading || messageInput.length === 0) {
+      return;
+    }
     const latestMessages = [
       ...messages,
       { message: messageInput, isMyMessage: true },
     ];
     setMessages(latestMessages);
+    setIsLoading(true);
 
     const chatRequest = prompt + `\nMe: ${messageInput}\nSeo-Ah: `;
     const requestOptions = {
@@ -51,6 +56,7 @@ const Chatting = () => {
           ...latestMessages,
           { message: reply, isMyMessage: false },
         ]);
+        setIsLoading(false);
       });
   };
 
@@ -87,8 +93,9 @@ const Chatting = () => {
             <div className="other-contents"></div>
             <button
               type="submit"
-              className="m-2 rounded bg-katalk-mychat py-2 px-4"
+              className="m-2 rounded bg-katalk-mychat py-2 px-4 hover:bg-amber-300 disabled:bg-gray-300 disabled:opacity-30"
               onClick={sendChat}
+              disabled={isLoading || messageInput.length === 0}
             >
               전송
             </button>
