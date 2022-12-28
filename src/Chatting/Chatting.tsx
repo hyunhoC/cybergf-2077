@@ -3,7 +3,11 @@ import { useState } from "react";
 import ChattingMessage from "./ChattingMessage";
 
 const Chatting = () => {
+  // This prompt field is what's important to give
+  // OpenAI an identity and how to behave
+  // See https://beta.openai.com/docs/guides/completion/prompt-design for example
   const [prompt, setPrompt] = useState(import.meta.env.VITE_INITIAL_PROMPT);
+  
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([
     { message: "안녕", isMyMessage: true },
@@ -27,7 +31,10 @@ const Chatting = () => {
     setMessages(latestMessages);
     setIsLoading(true);
 
+    // Putting all the previous conversation to prompt so that
+    // OpenAI knows the context of the entire conversation
     const chatRequest = prompt + `\nMe: ${messageInput}\nSeo-Ah: `;
+
     const requestOptions = {
       method: "POST",
       headers: {
